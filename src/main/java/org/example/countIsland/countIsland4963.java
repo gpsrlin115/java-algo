@@ -30,7 +30,10 @@ public class countIsland4963 {
 
         for(int i = 0; i<w; i++){
             for(int j = 0; j<h; j++){
-                
+                if(map[i][j] == 1 && !visited[i][j]){
+                    dfs(i, j);
+                    count++;
+                }
             }
         }
 
