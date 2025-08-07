@@ -8,34 +8,63 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class countIsland4963 {
+    static int[][] arr;
+    static boolean[][] visited;
+    static int[] dx = {-1,-1,-1,0,0,0,1,1,1};
+    static int[] dy = {-1,0,1,1,0,-1,-1,0,1};
+    static int h;
+    static int w;
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        String[] str = br.readLine().split(" ");
-        int w = Integer.parseInt(str[0]);
-        int h = Integer.parseInt(str[1]);
+        while(true){
+            String[] str = br.readLine().split(" ");
+            w = Integer.parseInt(str[0]);
+            h = Integer.parseInt(str[1]);
 
-        int[][] arr = new int[w][h];
+            arr = new int[h][w];
 
-        for (int i = 0; i<w; i++){
-            String tempStr = br.readLine();
-            String[] nums = tempStr.split(" ");
-            for (int j = 0; j<h; j++){
-                arr[i][j] = Integer.parseInt(nums[j]);
+            if(w == 0 && h == 0){
+                break;
             }
+
+            for (int i = 0; i<h; i++){
+                String tempStr = br.readLine();
+                String[] nums = tempStr.split(" ");
+                for (int j = 0; j<w; j++){
+                    arr[i][j] = Integer.parseInt(nums[j]);
+                }
+            }
+
+            int count = 0;
+            visited =  new boolean[h][w];
+            for(int i = 0; i<h; i++){
+                for(int j = 0; j<w; j++){
+                    if(arr[i][j] == 1 && !visited[i][j]){
+                        dfs(i, j);
+                        count++;
+                    }
+                }
+            }
+            bw.write(count+"\n");
+            bw.flush();
         }
 
-        int count = 0;
+        bw.close();
+        br.close();
+    }
+    static void dfs(int i, int j){
+        visited[i][j] = true;
+        for (int a = 0; a<9; a++){
+            int nx = i + dx[a];
+            int ny = j + dy[a];
 
-        for(int i = 0; i<w; i++){
-            for(int j = 0; j<h; j++){
-                if(map[i][j] == 1 && !visited[i][j]){
-                    dfs(i, j);
-                    count++;
+            if(nx>=0 && nx<h && ny>=0 && ny<w){
+                if (arr[nx][ny] == 1 && !visited[nx][ny]){
+                    dfs(nx, ny);
                 }
             }
         }
-
     }
 }
