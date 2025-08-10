@@ -59,7 +59,7 @@ public class koori5578 {
                 maxArea = Math.max(maxArea, currentArea);
             }
         }
-        bw.write(String.valueOf(maxArea)+"\n");
+        bw.write(maxArea+"\n");
         bw.flush();
         bw.close();
         br.close();

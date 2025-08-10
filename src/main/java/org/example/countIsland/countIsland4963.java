@@ -23,7 +23,7 @@ public class countIsland4963 {
             h = Integer.parseInt(str[1]);
 
             arr = new int[h][w];
-
+            // 마지막은 0/0이 주어진다.
             if(w == 0 && h == 0){
                 break;
             }
