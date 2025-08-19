@@ -47,7 +47,7 @@ public class Dijkstra {
         dist[0] = 0; //임의의 정점
         for(int cnt = 0; cnt<N-1; cnt++){
             int minIdx = -1; //기준 접점
-            int minD = Integer.MAX_VALUE기;
+            int minD = Integer.MAX_VALUE;
             //방문하지 않은 정점 중 최소 거리 정점 찾
             for(int i = 0; i<dist.length; i++){
                 if(!v[i] && dist[i] < minD){
