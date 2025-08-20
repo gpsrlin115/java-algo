@@ -1,4 +1,4 @@
-package main.java.org.example.algotemplate;
+package org.example.algotemplate;
 
 import java.util.Arrays;
 
