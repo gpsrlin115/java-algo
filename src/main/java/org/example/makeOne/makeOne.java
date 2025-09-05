@@ -16,10 +16,10 @@ public class makeOne {
         for (int i = 2; i<=N; i++){
             dp[i] = dp[i-1] + 1;
             if(i%2==0){ //if x % 2 == 0 -> x/2
-                dp[i] = dp[i/2]+1;
+                dp[i] = Math.min(dp[i], dp[i/2]+1);
             }
             if(i%3==0){ //if x % 3 == 0 -> x/3
-                dp[i] = dp[i/3]+1;
+                dp[i] = Math.min(dp[i], dp[i/3]+1);
             }
         }
         bw.write(String.valueOf(dp[N]));
