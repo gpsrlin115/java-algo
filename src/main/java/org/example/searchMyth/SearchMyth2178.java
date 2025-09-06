@@ -14,7 +14,7 @@ public class SearchMyth2178 {
     static int[] dc = {0, 0, 1, -1};
     static int[][] graph;
     static boolean[][] visited;
-    static int N,M;
+    static int N,M,result;
     static public class Point{
         int x;
         int y;
@@ -30,7 +30,7 @@ public class SearchMyth2178 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
-        
+
 
         graph = new int[N][M];
 

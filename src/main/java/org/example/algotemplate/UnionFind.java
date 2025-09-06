@@ -15,7 +15,7 @@ public class UnionFind {
         unionParent(parent, 7,8);
         System.out.println("1과 3은 연결 되어이있을까? "+findParent(parent, 1, 5));
         unionParent(parent, 1, 5);
-        System.out.println("1과 3은 연결 되어이있을까? "+findParent(parent, 1, 5));
+        System.out.println("1과 5은 연결 되어이있을까? "+findParent(parent, 1, 5));
     }
 
     public static void unionParent(int[] parent, int a, int b) {
