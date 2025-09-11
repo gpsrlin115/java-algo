@@ -35,18 +35,28 @@ public class Tomato7569 {
                 }
             }
         }
-        bw.write(String.valueOf(BFS(day)));
+        bw.write(String.valueOf(BFS(day,0,0,0)));
     }
-    public static int BFS(int day, int start){
+    public static int BFS(int day, int sr, int sc, int sh){
         Queue<int[]> q = new ArrayDeque<>();
-        q.offer();
-        for(int h = 0; h<H; h++){
-            for(int n=0; n<N; n++){
-                st = new StringTokenizer(br.readLine());
-                for(int m=0; m<M; m++){
-                    tomatoes[h][n][m] = Integer.parseInt(st.nextToken());
+        q.offer(new int[] {sr,sc,sh});
+        visited[sh][sr][sc] = true;
+        while(!q.isEmpty()){
+            int[] current = q.poll();
+            int r = current[0];
+            int c = current[1];
+            int h = current[2];
+            
+            for(int i =0; i <6; i++){
+                int nr = r + dr[i];
+                int nc = c + dc[i];
+                int nh = h + dh[i];
+                if (nr < 0 || nr >= N || nc < 0 || nc >= M || nh<0 || nh>=H ) continue;
+                if(!visited[nh][nr][nc] && tomatoes[nh][nr][nc] == 0){
+                    
                 }
             }
+            
         }
         return -1;
     }
