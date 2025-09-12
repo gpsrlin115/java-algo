@@ -9,7 +9,7 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Tomato7569 {
+public class Tomato3rd7569 {
     static int[][][] tomatoes;//[h][n][m]
     static boolean[][][] visited;
     static int[]dh = {-1,1,0,0,0,0};
