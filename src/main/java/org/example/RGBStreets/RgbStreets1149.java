@@ -29,8 +29,8 @@ public class RgbStreets1149 {
 
         for(int i=1;i<N;i++){
             memo[i][0] = Math.min(memo[i-1][1], memo[i-1][2]) + map[i][0];
-            memo[i][1] = Math.min(memo[i-1][0], memo[i-1][1]) + map[i][1];
-            memo[i][2] = Math.min(memo[i-1][2], memo[i-1][0]) + map[i][2];
+            memo[i][1] = Math.min(memo[i-1][0], memo[i-1][2]) + map[i][1];
+            memo[i][2] = Math.min(memo[i-1][0], memo[i-1][1]) + map[i][2];
         }
         bw.write(String.valueOf(Math.min(memo[N-1][0], Math.min(memo[N-1][1], memo[N-1][2]))));
         bw.flush();

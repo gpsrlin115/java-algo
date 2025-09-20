@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class Floyd2 {
@@ -20,8 +22,10 @@ public class Floyd2 {
             for(int j = 1; j<=n; j++){
                 if(i==j){
                     dp[i][j]=0;
+                    route[i][j]=0;
                 } else{
                     dp[i][j]=inf;
+                    route[i][j]=0;
                 }
 
             }
@@ -60,18 +64,30 @@ public class Floyd2 {
             bw.newLine();
         }
         bw.flush();
-
-        for(int i = 1; i<=n; i++){
-            for(int j = 1; j<=n; j++){
+        for(int i = 1; i<=n; i++){//시작
+            for(int j = 1; j<=n; j++){//끝
                 if(route[i][j]==0){
                     bw.write("0");
                     bw.newLine();
-                    continue;
-                }
+                } else{
+                    List<Integer> path = new ArrayList<>();
+                    int current = i;
+                    while(current != j){
+                       path.add(current);
+                       current = route[current][j];
+                    }
+                    path.add(j);
 
-                List<Integer> path = new ArrayList<>();
+                    bw.write(String.valueOf(path.size()));
+                    bw.newLine();
+                    for(int k = 0; k<path.size(); k++){
+                        bw.write(String.valueOf(path.get(k))+" ");
+                    }
+                    bw.newLine();
+                }
             }
         }
+        bw.flush();
         bw.close();
         br.close();
     }    
