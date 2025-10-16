@@ -38,13 +38,11 @@ public class NightLetter {
             int S = Integer.parseInt(st.nextToken());
             int E = Integer.parseInt(st.nextToken());
 
-            int answer = cal(C, S, E);
-            bw.write(answer + "\n");
+            //int answer = cal(C, S, E);
+            //bw.write(answer + "\n");
         }
     }
-    static int cal(int C, int S, int E){
-        int answer = 0x3f3f3f3f;
-
-        for(int )
-    }
+    //static int cal(int C, int S, int E){
+      //  int answer = 0x3f3f3f3f;
+    //}
 }
