@@ -115,6 +115,8 @@ public class Sokoban {
                         }
                         map[newRow][newCol] = 'w';
                     }
+                    
+                    //map[playerRow][playerCol] = '.';
                     playerRow = newRow;
                     playerCol = newCol;
                 } 
