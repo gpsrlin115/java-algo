@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 //벽돌이 모두 제거되었을 때 0을 출력
 //구슬은 좌우로만 이동가능 => W로 훑어서 그 라인의 제일 큰 값을 찾음
 //
+import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -93,6 +94,7 @@ public class CrushBrickSWEA5656 {
     }
 
     public static int countBricks(int[][] mapCopy){
+        Queue<Position> q = new ArrayDeque<>();
         
 
         return 0;
