@@ -11,7 +11,7 @@ public class Floyd {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        final int inf = 1_000_000;
+        final int inf = 1_000_000; //or 0x3f3f3f3f;
         int n = Integer.parseInt(br.readLine());
         int m = Integer.parseInt(br.readLine());
         int[][] dp = new int[n+1][n+1];
