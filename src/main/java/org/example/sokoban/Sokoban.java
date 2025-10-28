@@ -30,7 +30,7 @@ public class Sokoban {
                 String line = br.readLine();
                 for (int j = 0; j < c; j++) {
                     map[i][j] = line.charAt(j);
-                    if (map[i][j] == 'w') {
+                    if (map[i][j] == 'w') { //공사필요
                         playerRow = i;
                         playerCol = j;
                     }
