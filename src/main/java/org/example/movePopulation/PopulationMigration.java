@@ -4,23 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class PopulationMigration {
-    static int n,l,r,countDay;
+    static int n,l,r;
     static int[][] arr;
     static int[] dr = {-1, 1, 0, 0};
     static int[] dc = {0, 0, -1, 1};
     static boolean[][] v;
-    static class Node{
-        int x;
-        int y;
-        Node(int x, int y){
-            this.x = x;
-            this.y = y;
-        }
-    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -34,60 +29,56 @@ public class PopulationMigration {
                 arr[i][j]=Integer.parseInt(st.nextToken());
             }
         }
-        v = new boolean[n][n];
-        bfs(new Node(0,0));
-        System.out.println(countDay);
-    }
-    public static void bfs(Node node){
-        Queue<Node> q = new ArrayDeque<>();
-        q.offer(node);
-        int result = 0;
-        int check = 0;
-        int failedCheck = 0;
-        while(!q.isEmpty()) {
-            Node now = q.poll();
-            int x = now.x;
-            int y = now.y;
-            for (int i = 0; i < 4; i++) {
-                int nr = y + dr[i];
-                int nc = x + dc[i];
-                if (nr >= 0 && nr < n && nc >= 0 && nc < n) {
-                    if (v[nr][nc] != true) {
-                        int a = arr[y][x] - arr[nr][nc];
-                        if (l <= a && a <= r) {
-                            v[nr][nc] = true;
-                            q.offer(new Node(nr,nc));
-                        }
-                    } else{
-                        failedCheck++;
+        int days = 0;
+        while(true){
+            v = new boolean[n][n];
+            boolean moved = false;
+            for(int i = 0; i<n; i++){
+                for(int j = 0; j<n; j++){
+                    if(!v[i][j]){
+                        int unionSize = bfs(i,j);
+                        if (unionSize>1) moved = true;
                     }
                 }
             }
+            if(!moved) break;
+            days++;
         }
-        if (failedCheck == n*n){
-            return;
-        }
-        for(int i =0; i<n; i++){
-            for (int j = 0; j<n; j++){
-                if(v[i][j]==true){
-                    result+=arr[i][j];
-                    check++;
+        System.out.println(days);
+    }
+    public static int bfs(int sr, int sc){
+        Queue<int[]> q = new ArrayDeque<>();
+
+        List<int[]> coordinate = new ArrayList<>(); // 연합 좌표
+        q.offer(new int[]{sr,sc});
+        int sum = arr[sr][sc];
+        v[sr][sc]=true;
+        coordinate.add(new int[]{sr,sc});
+        while(!q.isEmpty()) {
+            int[] cur = q.poll();
+            int r0 = cur[0];
+            int c0 = cur[1];
+            for (int i = 0; i < 4; i++) {
+                int nr = r0 + dr[i];
+                int nc = c0 + dc[i];
+                if (nr < 0 || nr >= n || nc < 0 || nc >= n) continue;
+                if(v[nr][nc]) continue;
+
+                int diff = Math.abs(arr[r0][c0] - arr[nr][nc]);
+                if(diff>=l && diff <= r){
+                    v[nr][nc]=true;
+                    q.offer(new int[]{nr,nc});
+                    coordinate.add(new int[]{nr,nc});
+                    sum+=arr[nr][nc];
                 }
             }
         }
-        if (check == 0){
-            return;
-        } else {
-            result = result/check;
+        if (coordinate.size()<=1) return 1; //이동없다
+
+        int avg = sum/coordinate.size();
+        for(int[] p : coordinate){
+            arr[p[0]][p[1]] = avg;
         }
-        for(int i = 0; i<n; i++){
-            for(int j = 0; j<n; j++){
-                if(v[i][j]==true){
-                    arr[i][j] = result;
-                }
-            }
-        }
-        v = new boolean[n][n];
-        countDay++;
+        return coordinate.size();
     }
 }
