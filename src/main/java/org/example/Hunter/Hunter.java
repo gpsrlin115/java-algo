@@ -51,7 +51,7 @@ public class Hunter {
             points = new Point[totalPoints];
             points[0] = new Point(0,0); // 헌터 시작 (1,1 -> 0-indexed)
             for(int i = 1; i<=M; i++) points[i] = monsters[i];
-            for(int i = 1; i<=M; i++) points[i] = clients[i];
+            for(int i = 1; i<=M; i++) points[M+i] = clients[i];
 
             //모든 지점간 거리 계산
             dist = new int[totalPoints][totalPoints];
@@ -61,25 +61,49 @@ public class Hunter {
 
             minDist = Integer.MAX_VALUE;
             boolean[] visited = new boolean[totalPoints];
-            dfs(0,0,0 visited); //시작 인덱스 0
-            bw.write("#"+String.valueOf(t)+" "+String.valueOf(minDist));
+            dfs(0,0,0, visited); //시작 인덱스 0
+            bw.write("#"+t+" "+minDist);
         }
     }
     static void bfs (int idx){
         int[][] d = new int[N][N];
-        for (int[] row : d) Arrays.fill(row, -1);
-
+        for(int[] row:d) Arrays.fill(row, -1);
         Queue<Point> q = new ArrayDeque<>();
         Point start = points[idx];
         q.add(start);
         d[start.r][start.c] = 0;
-
         while(!q.isEmpty()){
             Point cur = q.poll();
-            for (int k = 0; k<4; k++){
+            for(int k = 0; k<4; k++){
                 int nr = cur.r + dr[k];
                 int nc = cur.c + dc[k];
+                if(nr<0||nc<0||nr>=N||nc>=N)continue;
+                if(d[nr][nc]!=-1)continue;
+                d[nr][nc] = d[cur.r][cur.c] +1;
+                q.add(new Point(nr,nc));
             }
+        }
+        //다른 모든 포인트와 거리 저장
+        for(int i = 0; i<totalPoints; i++){
+            if (i==idx) continue;
+            Point p = points[i];
+            dist[idx][i] = d[p.r][p.c];
+        }
+    }
+
+    static void dfs(int cur, int count, int sum, boolean[] visited){
+        if (sum>= minDist) return; //가지치기
+        if (count == 2 * M){
+            minDist = Math.min(minDist, sum);
+            return;
+        }
+        for(int next = 1; next<totalPoints; next++){
+            if(visited[next]) continue;
+            if(next>M && !visited[next-M]) continue; //고객인데 해당 몬스터 아직 방문 안했으면 스킵
+
+            visited[next] = true;
+            dfs(next, count+1, sum+dist[cur][next], visited);
+            visited[next] = false;
         }
     }
 }
