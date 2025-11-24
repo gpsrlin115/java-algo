@@ -46,7 +46,7 @@ public class MountainRoute {
                 st = new StringTokenizer(br.readLine());
                 for(int j = 0; j <N; j++){
                     mountain[i][j] = Integer.parseInt(st.nextToken());
-                    heighest = heighest > mountain[i][j] ? heighest : mountain[i][j];
+                    heighest = Math.max(heighest, mountain[i][j]);
                 }
             }
             for(int i = 0; i<N; i++){
@@ -66,7 +66,7 @@ public class MountainRoute {
         br.close();
     }
     public static void sol(info cur){
-        ans = ans > cur.len ? ans : cur.len; //길이가 더 길어 졌을때 만 정답으로 저장
+        ans = Math.max(ans, cur.len); //길이가 더 길어 졌을때 만 정답으로 저장
 
         for(int d = 0; d<4; d++){
             int nh = cur.h + dr[d];

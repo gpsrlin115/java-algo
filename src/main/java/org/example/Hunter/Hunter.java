@@ -61,7 +61,7 @@ public class Hunter {
 
             minDist = Integer.MAX_VALUE;
             boolean[] visited = new boolean[totalPoints];
-            dfs(0,0,0 visited); //시작 인덱스 0
+            //dfs(0,0,0 visited); //시작 인덱스 0
             bw.write("#"+String.valueOf(t)+" "+String.valueOf(minDist));
         }
     }

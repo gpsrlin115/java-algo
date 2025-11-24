@@ -19,7 +19,7 @@ public class Permutation {
     public static void permutation(int[] arr, int idx, int n, int r){
         if(idx == r){
             for(int i = 0; i<r; i++){
-                System.out.println(arr[i]+" ");
+                System.out.print(arr[i]+" ");
             }
             System.out.println();
             return;
