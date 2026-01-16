@@ -89,7 +89,6 @@ public class BeadsEscape2 {
                     System.out.println(b.cnt);
                     return;
                 }
-
                 if (nRr==nBr && nRc==nBc){
                     if(redMove.dist> blueMove.dist){
                         nRr -= dr[i];
