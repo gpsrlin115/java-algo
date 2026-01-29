@@ -33,6 +33,7 @@ public class BOJ13335 {
         while(!li.isEmpty()){
             if(bridge.size()<w){
                 bridge.add(li.poll());
+
             }
         }
     }
